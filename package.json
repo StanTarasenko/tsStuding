@@ -1,0 +1,24 @@
+{
+  "name": "tsstuding",
+  "version": "1.0.0",
+  "description": "Typescript course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StanTarasenko/tsStuding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StanTarasenko/tsStuding/issues"
+  },
+  "homepage": "https://github.com/StanTarasenko/tsStuding#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}

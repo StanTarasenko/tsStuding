@@ -1,2 +1,0 @@
-# tsStuding
-Typescript course

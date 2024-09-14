@@ -19,7 +19,7 @@ class School {
       this._firstName = name;
     }
   
-    addLevel(level: string) {
+    addLevel(level: string): void {
       this.levels.push(level);
     }
   }
@@ -39,7 +39,7 @@ class School {
       return this._name;
     }
   
-    get program() {
+    get program(): string {
       return this._program;
     }
   
@@ -49,9 +49,9 @@ class School {
   }
   
   class Group {
-    _students: { name: string; getPerformanceRating: () => number; }[] = [];
+    _students: any[] = [];
   
-    get students() {
+    get students(): any {
       return this._students;
     }
   
@@ -63,23 +63,13 @@ class School {
       this.levelName = levelName;
     }
   
-    addStudent(student: { name: string; getPerformanceRating: () => number }) {
+    addStudent(student: any): void {
       this._students.push(student);
     }
   
-    // Не виходить обозначити toSorted у students
-  
-    // showPerformance(): { name: string; getPerformanceRating: () => number }[] {
-    //   const sortedStudents = this.students.toSorted(
-    //     (a, b) => b.getPerformanceRating() - a.getPerformanceRating()
-    //   );
-  
-    //   return sortedStudents;
-    // }
-  
-    showPerformance(): { name: string; getPerformanceRating: () => number }[] {
-      const sortedStudents = this.students.sort(
-        (a, b) => b.getPerformanceRating() - a.getPerformanceRating()
+    showPerformance(): any[] {
+      const sortedStudents = this.students.toSorted(
+        (a: any, b: any) => b.getPerformanceRating() - a.getPerformanceRating()
       );
   
       return sortedStudents;
@@ -100,35 +90,35 @@ class School {
       this.birthYear = birthYear;
     }
   
-    get fullName() {
+    get fullName(): string {
       return `${this.lastName} ${this.firstName}`;
     }
   
-    set fullName(value) {
+    set fullName(value: string) {
       [this.lastName, this.firstName] = value.split(" ");
     }
   
-    get age() {
+    get age(): number {
       return new Date().getFullYear() - this.birthYear;
     }
   
-    setGrade(subject: string, grade: number) {
+    setGrade(subject: string, grade: number): void {
       this.grades[subject] = grade;
     }
   
-    markAttendance(present: number) {
+    markAttendance(present: number): void {
       this.attendance.push(present);
     }
   
-    getPerformanceRating() {
-      const gradeValues = Object.values(this.grades);
+    getPerformanceRating(): number {
+      const gradeValues: number[] = Object.values(this.grades);
   
       if (gradeValues.length === 0) return 0;
   
-      const averageGrade =
+      const averageGrade: number =
         gradeValues.reduce((sum, grade) => sum + grade, 0) / gradeValues.length;
   
-      const attendancePercentage =
+      const attendancePercentage: number =
         (this.attendance.filter((present) => present).length /
           this.attendance.length) *
         100;

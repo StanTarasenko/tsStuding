@@ -1,4 +1,4 @@
-class School {
+class School1 {
     directions: string[] = [];
   
     addDirection(direction: string): void {
@@ -24,7 +24,7 @@ class School {
     }
   }
   
-  class Level {
+  class Level1 {
     groups: string[] = [];
   
     _name!: string;
@@ -48,7 +48,7 @@ class School {
     }
   }
   
-  class Group {
+  class Group1 {
     _students: any[] = [];
   
     get students(): any {
@@ -76,7 +76,7 @@ class School {
     }
   }
   
-  class Student {
+  class Student1 {
     grades: { [subject: string]: number } = {};
     attendance: number[] = [];
   

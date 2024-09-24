@@ -49,17 +49,17 @@ class Rectangle extends GeometricFigure {
 class Square extends GeometricFigure {
     public sideLength: number;
 
-        public calculateArea(): number {
-            return this.sideLength * this.sideLength;
+    constructor(color: string = "black", name: string = "square", sideLength: number) {
+        super(color, name);
+        this.sideLength = sideLength;
+    }
+
+    public calculateArea(): number {
+        return this.sideLength * this.sideLength;
     }
 
     public print(): void {
         console.log(`Area of ${this.name} = sideLength * sideLength = ${this.sideLength} * ${this.sideLength}`);
-    }
-
-    constructor(color: string = "black", name: string = "square", sideLength: number) {
-        super(color, name);
-        this.sideLength = sideLength;
     }
 }
 
@@ -67,13 +67,13 @@ class Triangle extends GeometricFigure {
     public base: number;
     public height: number;
 
-        public calculateArea(): number {
-            return 0.5 * this.base * this.height;
-    }
-
     constructor(color: string = "yellow", name: string = "triangle", base: number, height: number) {
         super(color, name);
         this.base = base;
         this.height = height;
+    }
+
+    public calculateArea(): number {
+        return 0.5 * this.base * this.height;
     }
 }

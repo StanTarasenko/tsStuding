@@ -41,6 +41,7 @@ class Rectangle extends GeometricFigure {
         return this.width * this.height;
     }
 
+    // Please implement this method
     public print(): void {
         console.log(`Area of ${this.name} = width * height = ${this.width} * ${this.height}`);
     }
@@ -58,6 +59,7 @@ class Square extends GeometricFigure {
         return this.sideLength * this.sideLength;
     }
 
+    // Please implement this method
     public print(): void {
         console.log(`Area of ${this.name} = sideLength * sideLength = ${this.sideLength} * ${this.sideLength}`);
     }

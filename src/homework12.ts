@@ -40,7 +40,7 @@ interface MovieFilters {
   title?: MatchFilter<string>;
   releaseYear?: RangeFilter<number>;
   rating?: RangeFilter<number>;
-  awards?: ValueSetFilter<string>;
+  oscar?: ValueSetFilter<boolean>;
 }
   
 interface CategoryFilters {
@@ -70,14 +70,51 @@ class MovieList implements FilterableList<MovieFilters> {
     this.filterState.searchValue = value;
   }
 
-  applyFiltersValue(filters: MovieFilters): void {
+  applyFiltersValue(filters: MovieFilters): Movie[] {
     this.filterState.filters = filters;
+    let filteredMovies = this.movies;
 
     if (filters.title ) {
-      this.movies = this.movies.filter(movie =>
-        movie.title.includes(filters.title?.filter as string)
-      );
+      filteredMovies = this.filterByTitle(filteredMovies, filters.title);
     }
+
+    if (filters.releaseYear) {
+      filteredMovies = this.filterByReleaseYear(filteredMovies, filters.releaseYear);
+    }
+
+    if (filters.rating) {
+      filteredMovies = this.filterByRating(filteredMovies, filters.rating);
+    }
+
+    if (filters.oscar) {
+      filteredMovies = this.filterByOscar(filteredMovies, filters.oscar);
+    }
+
+    return filteredMovies;
+  }
+
+  private filterByTitle(movies: Movie[], filter: MatchFilter<string>): Movie[] {
+    return movies.filter(movie =>
+      movie.title.includes(filter.filter)
+    );
+  }
+
+  private filterByReleaseYear(movies: Movie[], filter: RangeFilter<number>): Movie[] {
+    return movies.filter(movie =>
+      movie.releaseYear >= filter.filter && movie.releaseYear <= filter.filterTo
+    );
+  }
+
+  private filterByRating(movies: Movie[], filter: RangeFilter<number>): Movie[] {
+    return movies.filter(movie =>
+      movie.rating >= filter.filter && movie.rating <= filter.filterTo
+    );
+  }
+
+  private filterByOscar(movies: Movie[], filter: ValueSetFilter<boolean>): Movie[] {
+    return movies.filter(movie =>
+      filter.values.includes(true) === movie.awards.includes("Oscar")
+    );
   }
 }
   
@@ -93,13 +130,19 @@ class CategoryList implements FilterableList<CategoryFilters> {
     this.filterState.searchValue = value;
   }
 
-  applyFiltersValue(filters: CategoryFilters): void {
+  applyFiltersValue(filters: CategoryFilters): Category[] {
     this.filterState.filters = filters;
+    let filteredCategories = this.categories;
 
     if (filters.name) {
-      this.categories = this.categories.filter(category =>
-        category.name.includes(filters.name?.filter as string)
-      );
+      filteredCategories = this.filterByName(filteredCategories, filters.name);
     }
+
+    return filteredCategories;
+  }
+  private filterByName(categories: Category[], filter: MatchFilter<string>): Category[] {
+    return categories.filter(category =>
+      category.name.includes(filter.filter)
+    );
   }
 }
